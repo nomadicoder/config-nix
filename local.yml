@@ -9,3 +9,17 @@
       - tmux
       - calibre
       - anki
+      - emacs
+      - gpg
+      - keepassxc
+      - thunderbird
+      - enigmail
+      - libreoffice
+      - slack
+      - tor
+      - vlc
+      - obs-studio
+      - gimp
+      - imagemagick
+      - meld
+      - rbenv
