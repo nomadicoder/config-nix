@@ -6,22 +6,38 @@
       state: present
       autoclean: yes
       name:
-      - htop
-      - mc
-      - tmux
-      - calibre
-      - anki
-      - emacs
-      - gpg
-      - keepassxc
       - thunderbird
+      - anki
+      - borgbackup
+      - calibre
+      - deja-dup
+      - emacs
       - enigmail
-      - libreoffice
-      - slack
-      - tor
-      - vlc
-      - obs-studio
+      - flatpak
+      - ffmpeg
       - gimp
+      - git-cola
+      - golang
+      - gpg
+      - gpodder
+      - hugo
       - imagemagick
+      - inkscape
+      - keepassxc
+      - libreoffice
       - meld
+      - obs-studio
+      - postgresql
       - rbenv
+      - remmina
+      - simple-scan
+      - seahorse
+      - sqlite3
+      - syncthing
+      - tilix
+      - tmux
+      - tor
+      - transmission
+      - vlc
+      - wget
+      - yubikey-personalization
