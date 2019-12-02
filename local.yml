@@ -94,3 +94,16 @@
     apt:
       deb: https://zoom.us/client/latest/zoom_amd64.deb
       state: present
+
+  - name: Install Chrome
+    apt:
+      deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      state: present
+
+  - name: Remove useless packages from the cache
+    apt:
+      autoclean: yes
+
+  - name: Remove dependencies that are no longer required
+    apt:
+      autoremove: yes
