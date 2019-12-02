@@ -74,3 +74,10 @@
       name: virtualbox
       state: present
 
+  - name: Install docker
+    apt:
+      state: present
+      autoclean: yes
+      name:
+      - docker
+      - docker-compose
