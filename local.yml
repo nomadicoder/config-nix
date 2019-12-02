@@ -35,6 +35,8 @@
       - seahorse
       - sqlite3
       - syncthing
+      - libgtk-3-dev
+      - python-vte
       - tilix
       - tmux
       - tor
@@ -42,3 +44,11 @@
       - vlc
       - wget
       - yubikey-personalization
+  - name: Fix tilix dependency
+    file:
+      src: /etc/profile.d/vte-2.91.sh
+      dest: /etc/profile.d/vte.sh
+      owner: root
+      group: root
+      state: link
+
