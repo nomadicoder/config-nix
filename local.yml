@@ -28,8 +28,8 @@
       - libreoffice
       - meld
       - obs-studio
-      - postgresql
-      - rbenv
+      - postgresql-server-dev-10
+      - libpq-dev
       - remmina
       - simple-scan
       - seahorse
@@ -99,6 +99,44 @@
     apt:
       deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       state: present
+
+  - name: Add node key by id from a keyserver
+    apt_key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      state: present
+
+  - name: Add node repository
+    apt_repository:
+      repo: deb http://deb.nodesource.com/node_8.x bionic main
+      filename: nodesource.list
+      state: present
+
+  - name: Add node source repository
+    apt_repository:
+      repo: deb-src http://deb.nodesource.com/node_8.x bionic main
+      filename: nodesource.list
+      state: present
+
+  - name: Install Node
+    apt:
+      update_cache: yes
+      name: nodejs
+      state: present
+
+  - name: Install Yarn
+    apt:
+      name: yarn
+      state: present
+
+  - name: Install rbenv
+    git:
+      repo: https://github.com/rbenv/rbenv.git
+      dest: /home/skng/.rbenv
+
+  - name: Install ruby-build
+    git:
+      repo: https://github.com/rbenv/ruby-build.git
+      dest: /home/skng/.rbenv/plugins/ruby-build
 
   - name: Remove useless packages from the cache
     apt:
