@@ -4,10 +4,10 @@
   become: true
   tasks:
   - name: Install packages
-    apt:
+    package:
       state: present
-      autoclean: yes
-      name:
+      name: "{{ item }}"
+    loop:
       - borgbackup
       - curl
       - flatpak
@@ -17,26 +17,3 @@
       - syncthing
       - vim
       - wget
-  - name: Install GPG
-    apt:
-      state: present
-      autoclean: yes
-      name:
-        - gnupg2
-        - gnupg-agent
-        - dirmngr
-        - cryptsetup
-        - scdaemon
-        - pcscd
-        - secure-delete
-        - hopenpgp-tools
-        - yubikey-personalization
-  - name: OpenVPN
-    apt:
-      state: present
-      autoclean: yes
-      name:
-        - openvpn
-        - easy-rsa
-        - network-manager-openvpn
-

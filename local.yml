@@ -2,141 +2,60 @@
   become: true
   tasks:
   - name: Install packages
-    apt:
+    package:
       state: present
-      autoclean: yes
-      name:
-      - vim
-      - neovim
-      - thunderbird
+      name: "{{ item }}"
+    loop:
       - anki
+      - apt-transport-https
       - borgbackup
       - calibre
+      - curl
       - emacs
-      - enigmail
-      - flatpak
       - ffmpeg
       - gimp
-      - git-cola
       - golang
-      - gpg
       - gpodder
       - hugo
       - imagemagick
       - inkscape
-      - keepassxc
       - libreoffice
       - meld
-      - obs-studio
-      - postgresql-server-dev-10
-      - libpq-dev
+      - openssh-server
+      - pandoc
       - remmina
       - simple-scan
       - seahorse
       - sqlite3
-      - syncthing
-      - libgtk-3-dev
-      - python-vte
-      - tilix
-      - tmux
-      - tor
-      - transmission
+      - sshfs
+      - thunderbird
+      - vim
       - vlc
       - wget
+
+  - name: Install encryption packages
+    package:
+      state: present
+      name: "{{ item }}"
+    loop:
+      - gnupg2
+      - gnupg-agent
+      - dirmngr
+      - cryptsetup
+      - scdaemon
+      - pcscd
+      - secure-delete
+      - hopenpgp-tools
       - yubikey-personalization
-      - pandoc
 
-  - name: Fix tilix dependency
-    file:
-      src: /etc/profile.d/vte-2.91.sh
-      dest: /etc/profile.d/vte.sh
-      owner: root
-      group: root
-      state: link
-
-  - name: Add first apt key by id from a keyserver
-    apt_key:
-      keyserver: https://www.virtualbox.org/download/oracle_vbox_2016.asc
-      id: B9F8D658297AF3EFC18D5CDFA2F683C52980AECF
-
-  - name: Add second apt key by id from a keyserver
-    apt_key: 
-      keyserver: https://www.virtualbox.org/download/oracle_vbox.asc
-      id: 7B0FAB3A13B907435925D9C954422A4B98AB5139
-
-  - name: Add VirtualBox repository
-    apt_repository:
-      repo: deb-src http://archive.canonical.com/ubuntu bionic contrib
+  - name: OpenVPN
+    package:
       state: present
-      update_cache: yes
-
-  - name: Install VirtualBox
-    apt:
-      name: virtualbox
-      state: present
-      autoclean: yes
-
-  - name: Install Docker
-    apt:
-      state: present
-      autoclean: yes
-      name:
-      - docker
-      - docker-compose
-
-  - name: Install Slack
-    snap:
-      name: slack
-      classic: yes
-      state: present
-
-  - name: Install Zoom
-    apt:
-      deb: https://zoom.us/client/latest/zoom_amd64.deb
-      state: present
-
-  - name: Install Chrome
-    apt:
-      deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      state: present
-
-  - name: Add node key by id from a keyserver
-    apt_key:
-      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-      state: present
-
-  - name: Add node repository
-    apt_repository:
-      repo: deb http://deb.nodesource.com/node_8.x bionic main
-      filename: nodesource.list
-      state: present
-
-  - name: Add node source repository
-    apt_repository:
-      repo: deb-src http://deb.nodesource.com/node_8.x bionic main
-      filename: nodesource.list
-      state: present
-
-  - name: Install Node
-    apt:
-      update_cache: yes
-      name: nodejs
-      state: present
-
-  - name: Install Yarn
-    apt:
-      name: yarn
-      state: present
-
-  - name: Install rbenv
-    git:
-      repo: https://github.com/rbenv/rbenv.git
-      dest: /home/skng/.rbenv
-
-  - name: Install ruby-build
-    git:
-      repo: https://github.com/rbenv/ruby-build.git
-      dest: /home/skng/.rbenv/plugins/ruby-build
+      name: "{{ item }}"
+    loop:
+      - openvpn
+      - easy-rsa
+      - network-manager-openvpn
 
   - name: Remove useless packages from the cache
     apt:

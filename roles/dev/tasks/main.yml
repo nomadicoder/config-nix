@@ -1,5 +1,16 @@
 - hosts: localhost
-  tasks:
+  - name: Install development dependencies
+    package:
+      state: present
+      name: "{{ item }}"
+    loop:
+      - build-essential
+      - libssl-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - sqlite3
+      - libsqlite3-dev
+
   - name: Install rbenv
     git:
       repo: https://github.com/rbenv/rbenv.git
