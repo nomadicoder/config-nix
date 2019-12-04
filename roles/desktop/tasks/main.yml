@@ -1,0 +1,66 @@
+- hosts: localhost
+  become: true
+  tasks:
+  - name: Install packages
+    apt:
+      state: present
+      autoclean: yes
+      name:
+      - vim
+      - neovim
+      - thunderbird
+      - anki
+      - borgbackup
+      - calibre
+      - emacs
+      - enigmail
+      - flatpak
+      - ffmpeg
+      - gimp
+      - golang
+      - gpg
+      - gpodder
+      - hugo
+      - imagemagick
+      - inkscape
+      - keepassxc
+      - libreoffice
+      - pandoc
+      - remmina
+      - simple-scan
+      - seahorse
+      - syncthing
+      - tilix
+      - tor
+      - transmission
+      - vlc
+      - wget
+      - yubikey-personalization
+
+  - name: Add Brave key by id from a keyserver
+    apt_key:
+      url: https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+      file: /etc/apt/trusted.gpg.d/brave-browser-release.gpg
+      state: present
+
+  - name: Add Brave repository
+    apt_repository:
+      repo: deb https://brave-browser-apt-release.s3.brave.com {{ lsb_release -sc main }}
+      filename: brave-browser-release-{{ lsb_release -sc }}.list
+      state: present
+
+  - name: Install Brave
+    apt:
+      update_cache: yes
+      name: brave-browser
+      state: present
+
+  - name: Add Gnome Shell Extensions
+    apt_repository:
+      repo: ppa:gnome-shell-extensions
+      state: present
+
+  - name: Install Gnome Shell Weather Extension
+    apt:
+      name: gnome-shell-extension-weather
+      state: present

@@ -1,0 +1,9 @@
+---
+
+# Provision workstation and laptops
+
+- name: Install standard Debian packages
+  hosts: all
+  roles:
+    - base
+    - desktop
