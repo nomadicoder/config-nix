@@ -57,6 +57,24 @@
       - easy-rsa
       - network-manager-openvpn
 
+  - name: Add Brave key by id from a keyserver
+    apt_key:
+      url: https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+      keyring: /etc/apt/trusted.gpg.d/brave-browser-release.gpg
+      state: present
+  
+  - name: Add Brave repository
+    apt_repository:
+      repo: deb https://brave-browser-apt-release.s3.brave.com {{ ansible_distribution_release }} main
+      filename: brave-browser-release-{{ ansible_distribution_release }}.list
+      state: present
+      update_cache: yes
+
+  - name: Install Brave
+    apt:
+      name: brave-browser
+      state: present
+
   - name: Remove useless packages from the cache
     apt:
       autoclean: yes
