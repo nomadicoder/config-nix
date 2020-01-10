@@ -40,11 +40,13 @@
   - name: Add Brave key by id from a keyserver
     apt_key:
       url: https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+      file: /etc/apt/trusted.gpg.d/brave-browser-release.gpg
       state: present
 
   - name: Add Brave repository
     apt_repository:
-      repo: deb https://brave-browser-apt-release.s3.brave.com/ bionic main
+      repo: deb https://brave-browser-apt-release.s3.brave.com bionic main
+      filename: brave-browser-release-bionic.list
       state: present
 
   - name: Install Brave
