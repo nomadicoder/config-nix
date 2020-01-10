@@ -1,0 +1,8 @@
+- hosts: localhost
+  become: true
+  tasks:
+  - name: Install node packages
+    npm:
+      state: present
+      name:
+        - ajv-cli
